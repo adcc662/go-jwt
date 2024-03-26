@@ -12,7 +12,7 @@ RUN go mod download
 COPY . .
 
 # Compila la aplicación
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o myapp .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o go-jwt .
 
 # Utiliza la imagen base de alpine por ser una imagen ligera
 FROM alpine:latest
@@ -23,7 +23,7 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 
 # Copia el ejecutable compilado desde la imagen de compilación
-COPY --from=builder /app/myapp .
+COPY --from=builder /app/go-jwt .
 
 # Copia el archivo de base de datos SQLite, si ya existe
 # Si el archivo de la base de datos se va a generar en tiempo de ejecución o se monta un volumen, esta línea no es necesaria
