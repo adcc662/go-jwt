@@ -79,3 +79,11 @@ func (u *User) ValidatePhone() error {
 	}
 	return nil
 }
+
+func (u *User) ValidateEmail() error {
+	match, _ := regexp.MatchString(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`, u.Email)
+	if !match {
+		return errors.New("email is invalid")
+	}
+	return nil
+}
