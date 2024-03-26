@@ -4,6 +4,7 @@ import (
 	"errors"
 	_ "errors"
 	_ "github.com/jinzhu/gorm"
+	"go-jwt/common"
 	"golang.org/x/crypto/bcrypt"
 	_ "golang.org/x/crypto/bcrypt"
 	"regexp"
@@ -18,7 +19,8 @@ type User struct {
 }
 
 func AutoMigrate() {
-
+	db := common.GetDB()
+	db.AutoMigrate(&User{})
 }
 
 func (u *User) setPassword(password string) error {
@@ -43,4 +45,37 @@ func (u *User) CheckPassword(password string) error {
 	bytePassword := []byte(password)
 	byteHashedPassword := []byte(u.Password)
 	return bcrypt.CompareHashAndPassword(byteHashedPassword, bytePassword)
+}
+
+func FindOneUser(condition interface{}) (User, error) {
+	db := common.GetDB()
+	var model User
+	err := db.Where(condition).First(&model).Error
+	return model, err
+}
+
+func SaveOne(data interface{}) error {
+	db := common.GetDB()
+	err := db.Save(data).Error
+	return err
+}
+
+func UpdateOne(data interface{}) error {
+	db := common.GetDB()
+	err := db.Model(data).Update(data).Error
+	return err
+}
+
+func DeleteOne(data interface{}) error {
+	db := common.GetDB()
+	err := db.Delete(data).Error
+	return err
+}
+
+func (u *User) ValidatePhone() error {
+	match, _ := regexp.MatchString(`^\d{10}$`, u.Phone)
+	if !match {
+		return errors.New("phone must be exactly 10 digits")
+	}
+	return nil
 }
