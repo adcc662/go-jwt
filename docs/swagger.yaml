@@ -1,0 +1,9 @@
+basePath: /api
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server for Go JWT.
+  title: Swagger Go JWT API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
