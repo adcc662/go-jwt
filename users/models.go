@@ -87,3 +87,9 @@ func (u *User) ValidateEmail() error {
 	}
 	return nil
 }
+
+func (model *User) Update(data interface{}) error {
+	db := common.GetDB()
+	err := db.Model(model).Update(data).Error
+	return err
+}

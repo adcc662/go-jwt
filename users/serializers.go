@@ -28,6 +28,7 @@ func (self *ProfileSerializer) Response() ProfileResponse {
 
 type UserSerializer struct {
 	C *gin.Context
+	User
 }
 
 type UserResponse struct {
@@ -37,9 +38,10 @@ type UserResponse struct {
 }
 
 func (self *UserSerializer) Response() UserResponse {
+	user := self.User
 	return UserResponse{
-		Username: self.C.PostForm("username"),
-		Email:    self.C.PostForm("email"),
-		Phone:    self.C.PostForm("phone"),
+		Username: user.Username,
+		Email:    user.Email,
+		Phone:    user.Phone,
 	}
 }
