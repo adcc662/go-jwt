@@ -58,33 +58,33 @@
        var p *int = &x // 'p' es un pointer a 'x'
      ```
 
-   7. **¿Qué es struct?**
-      <br>Permite agrupar campos bajo un nombre o es como se crean las entidades en Go.</br>
-         ```go
-           type Persona struct {
-               nombre string
-               edad int
-           }
-         ```
+7. **¿Qué es struct?**
+   <br>Permite agrupar campos bajo un nombre o es como se crean las entidades en Go.</br>
+      ```go
+        type Persona struct {
+            nombre string
+            edad int
+        }
+      ```
 
-      8. **¿Qué es un goroutine?**
-          <br>Es una función que se ejecuta de manera concurrente y permite realizar tareas en paralelo de una manera mas sencilla; es uno de los conceptos mas fundamentales de go.</br>
-          ```go
+8. **¿Qué es un goroutine?**
+    <br>Es una función que se ejecuta de manera concurrente y permite realizar tareas en paralelo de una manera mas sencilla; es uno de los conceptos mas fundamentales de go.</br>
+    ```go
     
-             import (
-               "fmt"
-               "time"
-              )
+       import (
+         "fmt"
+         "time"
+        )
 
-              func decir(s string) {
-                 for i := 0; i < 5; i++ {
-                     time.Sleep(100 * time.Millisecond)
-                     fmt.Println(s)
-                    }
-            }
+        func decir(s string) {
+           for i := 0; i < 5; i++ {
+               time.Sleep(100 * time.Millisecond)
+               fmt.Println(s)
+              }
+      }
 
-              func main() {
-              go decir("mundo")
-              decir("hola")
-            }
-            ```
+        func main() {
+        go decir("mundo")
+        decir("hola")
+      }
+      ```
